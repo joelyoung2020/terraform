@@ -1,7 +1,7 @@
 provider "aws" {
   region = "eu-west-3"
-  access_key = "AKIARAIGE77I4OKP7SAM"
-  secret_key = "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"
+  access_key = "AKIARAIGE77IUUVAEEWD"
+  secret_key = "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"
 }
 terraform {
   required_version = ">= 0.13.1"
