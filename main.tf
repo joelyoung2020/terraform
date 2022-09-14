@@ -62,7 +62,7 @@ module "eks" {
     disk_size              = 10
     min_capacity           = 0
     max_capacity           = 10
-    desired_capacity       = 0
+    desired_capacity       = 1
     capacity_type          = "ON_DEMAND"
     enable_bootstrap_user_data = true
   }
