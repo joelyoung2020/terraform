@@ -61,8 +61,8 @@ module "eks" {
   eks_managed_node_groups = {
     green = {
       min_size     = 1
-      max_size     = 4
-      desired_size = 2
+      max_size     = 2
+      desired_size = 1
 
       instance_types = ["t2.small"]
       capacity_type  = "SPOT"
@@ -113,7 +113,7 @@ resource "kubernetes_deployment" "example" {
   }
 
   spec {
-    replicas = 3
+    replicas = 1
 
     selector {
       match_labels = {
