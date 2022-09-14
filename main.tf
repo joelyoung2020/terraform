@@ -66,7 +66,7 @@ module "eks" {
 
       instance_types = ["t2.small"]
       capacity_type  = "SPOT"
-      enable_bootstrap_user_data = false
+      
     }
   }
 
