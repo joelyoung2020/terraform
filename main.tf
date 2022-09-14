@@ -58,16 +58,13 @@ module "eks" {
   cluster_endpoint_private_access = true
   vpc_id = module.vpc.vpc_id
 
-  eks_managed_node_groups = {
-    green = {
-      min_size     = 1
-      max_size     = 2
-      desired_size = 1
-
-      instance_types = ["t2.small"]
-      capacity_type  = "SPOT"
-      
-    }
+  eks_managed_node_group_defaults = {
+    disk_size              = 10
+    min_capacity           = 0
+    max_capacity           = 10
+    desired_capacity       = 0
+    capacity_type          = "ON_DEMAND"
+    enable_bootstrap_user_data = true
   }
 
   manage_aws_auth_configmap = true
