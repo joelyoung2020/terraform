@@ -58,7 +58,7 @@ module "eks" {
   cluster_endpoint_private_access = true
   vpc_id = module.vpc.vpc_id
 
-   eks_managed_node_groups = {
+  eks_managed_node_groups = {
     green = {
       min_size     = 1
       max_size     = 2
