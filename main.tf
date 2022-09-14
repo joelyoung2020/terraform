@@ -59,10 +59,11 @@ module "eks" {
   vpc_id = module.vpc.vpc_id
 
   eks_managed_node_groups = {
+    blue = {}
     green = {
       min_size     = 1
-      max_size     = 4
-      desired_size = 2
+      max_size     = 2
+      desired_size = 1
 
       instance_types = ["t2.small"]
       capacity_type  = "SPOT"
@@ -83,6 +84,11 @@ module "eks" {
     {
       userarn  = "arn:aws:iam::66666666666:user/user1"
       username = "user1"
+      groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::66666666666:user/user2"
+      username = "user2"
       groups   = ["system:masters"]
     },
   ]
@@ -112,7 +118,7 @@ resource "kubernetes_deployment" "example" {
   }
 
   spec {
-    replicas = 2
+    replicas = 3
 
     selector {
       match_labels = {
@@ -152,9 +158,6 @@ resource "kubernetes_service" "example" {
     name = "example"
   }
   spec {
-    selector = {
-      test = "MyExampleApp"
-    }
     port {
       port        = 8080
       target_port = 80
