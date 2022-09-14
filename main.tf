@@ -1,7 +1,7 @@
 provider "aws" {
   region = "eu-west-3"
-  access_key = "AKIARAIGE77I4OKP7SAM"
-  secret_key = "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"
+  access_key = "AKIARAIGE77IUUVAEEWD"
+  secret_key = "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"
 }
 terraform {
   required_version = ">= 0.13.1"
@@ -59,11 +59,10 @@ module "eks" {
   vpc_id = module.vpc.vpc_id
 
   eks_managed_node_groups = {
-    blue = {}
     green = {
       min_size     = 1
-      max_size     = 2
-      desired_size = 1
+      max_size     = 4
+      desired_size = 2
 
       instance_types = ["t2.small"]
       capacity_type  = "SPOT"
