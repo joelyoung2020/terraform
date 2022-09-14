@@ -66,6 +66,7 @@ module "eks" {
 
       instance_types = ["t2.small"]
       capacity_type  = "SPOT"
+      enable_bootstrap_user_data = false
     }
   }
 
@@ -81,12 +82,7 @@ module "eks" {
 
   aws_auth_users = [
     {
-      userarn  = "arn:aws:iam::66666666666:user/user1"
-      username = "user1"
-      groups   = ["system:masters"]
-    },
-    {
-      userarn  = "arn:aws:iam::66666666666:user/user2"
+      userarn  = "arn:aws:iam::069269258193:user/Joel"
       username = "user2"
       groups   = ["system:masters"]
     },
