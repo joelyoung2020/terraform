@@ -1,3 +1,8 @@
+provider "aws" {
+  region = us-west-3"
+  access_key = "AKIARAIGE77I4OKP7SAM"
+  secret_key = "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"
+}
 terraform {
   required_version = ">= 0.13.1"
 }
@@ -58,11 +63,10 @@ module "eks" {
   vpc_id = module.vpc.vpc_id
 
   eks_managed_node_groups = {
-    blue = {}
     green = {
       min_size     = 1
-      max_size     = 2
-      desired_size = 1
+      max_size     = 4
+      desired_size = 2
 
       instance_types = ["t2.small"]
       capacity_type  = "SPOT"
@@ -73,7 +77,7 @@ module "eks" {
 
   aws_auth_roles = [
     {
-      rolearn  = "arn:aws:iam::66666666666:role/role1"
+      rolearn  = "arn:aws:iam::069269258193:role/eksClusterRole"
       username = "role1"
       groups   = ["system:masters"]
     },
@@ -81,13 +85,8 @@ module "eks" {
 
   aws_auth_users = [
     {
-      userarn  = "arn:aws:iam::66666666666:user/user1"
+      userarn  = "arn:aws:iam::069269258193:user/Joel"
       username = "user1"
-      groups   = ["system:masters"]
-    },
-    {
-      userarn  = "arn:aws:iam::66666666666:user/user2"
-      username = "user2"
       groups   = ["system:masters"]
     },
   ]
@@ -117,7 +116,7 @@ resource "kubernetes_deployment" "example" {
   }
 
   spec {
-    replicas = 3
+    replicas = 2
 
     selector {
       match_labels = {
@@ -157,6 +156,9 @@ resource "kubernetes_service" "example" {
     name = "example"
   }
   spec {
+    selector = {
+      test = "MyExampleApp"
+    }
     port {
       port        = 8080
       target_port = 80
