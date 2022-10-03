@@ -93,11 +93,11 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   token = data.aws_eks_cluster_auth.cluster.token
 }
-resource "kubernetes_deployment" "example" {
+resource "kubernetes_deployment" "superman-deploy" {
   metadata {
-    name = "terraform-example"
+    name = "superman"
     labels = {
-      test = "MyExampleApp"
+      test = "superman"
     }
   }
 
@@ -106,14 +106,14 @@ resource "kubernetes_deployment" "example" {
 
     selector {
       match_labels = {
-        test = "MyExampleApp"
+        test = "superman-pod"
       }
     }
 
     template {
       metadata {
         labels = {
-          test = "MyExampleApp"
+          test = "superman-pod"
         }
       }
 
@@ -137,9 +137,9 @@ resource "kubernetes_deployment" "example" {
     }
   }
 }
-resource "kubernetes_service" "example" {
+resource "kubernetes_service" "superman-svc" {
   metadata {
-    name = "example"
+    name = "superman"
   }
   spec {
     port {
