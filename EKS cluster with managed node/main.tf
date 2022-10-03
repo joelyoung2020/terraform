@@ -119,7 +119,7 @@ resource "kubernetes_deployment" "example" {
 
       spec {
         container {
-          image = "nginx:1.21.6"
+          image = "joelyoung/super"
           name  = "example"
 
           resources {
