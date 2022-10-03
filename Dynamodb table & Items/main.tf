@@ -6,7 +6,7 @@ provider "aws" {
 }
 
 resource "aws_dynamodb_table" "friends"
-  name "${var.aws_table}"
+  name = "${var.aws_table}"
   hash_key = "UserId"
   billing_mode = "PAY_PER_REQUEST"
   attribute {
